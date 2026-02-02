@@ -669,12 +669,53 @@
           <p class="pro-tip-highlight">Boost Payouts by $200-$300/week!</p>
         </div>
         
-  <a href="https://www.phef6trk.com/QZ85XF/2TG7MMC/" class="cta-button" style="text-decoration: none; display: block;">
+<a
+  href="https://www.phef6trk.com/QZ85XF/2TG7MMC/"
+  id="ctaLink"
+  class="cta-button"
+  style="text-decoration: none; display: block;"
+>
   <span>
     Start Earning Now!
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"/>
+      <polyline points="12 5 19 12 12 19"/>
+    </svg>
   </span>
 </a>
+
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const link = document.getElementById('ctaLink');
+  if (!link) return;
+
+  const finalParams = new URLSearchParams();
+
+  // ---- sub2 logic ----
+  const sub2 = params.get('sub2');
+  if (sub2) {
+    const v = sub2.toLowerCase();
+    const key = (v.startsWith('ca') || v.startsWith('feng12'))
+      ? 'aff_sub3'
+      : 'sub2';
+    finalParams.set(key, sub2);
+  }
+
+  // ---- s1 / s2 / s3 passthrough ----
+  ['s1', 's2', 's3'].forEach(k => {
+    const v = params.get(k);
+    if (v) finalParams.set(k, v);
+  });
+
+  // ---- apply to link ----
+  if (finalParams.toString()) {
+    link.href += (link.href.includes('?') ? '&' : '?') + finalParams.toString();
+  }
+})();
+</script>
+
         <!-- Feature Badges -->
         <div class="features">
           <div class="feature-badge">
