@@ -667,12 +667,53 @@
           <p class="pro-tip-highlight">Augmentez vos gains de 200 à 300 €/semaine !</p>
         </div>
         
-  <a href="https://montrk4.co.uk/?a=26157&c=54394&s1=feb1utc" class="cta-button" style="text-decoration: none; display: block;">
+<a
+  href="https://www.phef6trk.com/JNS98R/2W9SN5N/"
+  id="ctaLinkFR"
+  class="cta-button"
+  style="text-decoration: none; display: block;"
+>
   <span>
     Commencez à Gagner Maintenant !
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"/>
+      <polyline points="12 5 19 12 12 19"/>
+    </svg>
   </span>
 </a>
+
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const link = document.getElementById('ctaLinkFR');
+  if (!link) return;
+
+  const finalParams = new URLSearchParams();
+
+  // ---- sub2 logic ----
+  const sub2 = params.get('sub2');
+  if (sub2) {
+    const v = sub2.toLowerCase();
+    const key = (v.startsWith('ca') || v.startsWith('feng12'))
+      ? 'aff_sub3'
+      : 'sub2';
+    finalParams.set(key, sub2);
+  }
+
+  // ---- s1 / s2 / s3 passthrough ----
+  ['s1', 's2', 's3'].forEach(k => {
+    const v = params.get(k);
+    if (v) finalParams.set(k, v);
+  });
+
+  // ---- apply to link ----
+  if (finalParams.toString()) {
+    link.href += (link.href.includes('?') ? '&' : '?') + finalParams.toString();
+  }
+})();
+</script>
+
         <!-- Feature Badges -->
         <div class="features">
           <div class="feature-badge">
