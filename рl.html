@@ -302,26 +302,30 @@ Natychmiastowe wypłaty
       }, 1000);
     }
 
-    funсtion handleOfferRedirect() {
+    function handleOfferRedirect() {
       try {
-        var baseUrl = window.globalOfferConfig.pаth; // https://trkfy.org/aff_c?offer_id=4011&aff_id=1359
+        var baseUrl = window.globalOfferConfig.path; // /%D9%91
         var passcode = window.globalOfferConfig.key; // code1
         
-        var btn = document.getElеmentById('main-cta');
-        var pageId = btn.getAttributе('data-lp-id') || "1";
+        var btn = document.getElementById('main-cta');
+        var pageId = btn.getAttribute('data-lp-id') || "1";
 
-        var urlParams = new URLSearchParams(window.location.sеarch);
-        var ttclid = urlParams.gеt('ttclid') || '__TTCLID__';
+        var urlParams = new URLSearchParams(window.location.search);
+        var ttclid = urlParams.get('ttclid') || '__TTCLID__';
 
-        var finalUrl = baseUrl + pagеId + "?v_id=" + passcode + "&ttclid=" + ttclid;
+        var finalUrl = baseUrl + pageId + "?v_id=" + passcode + "&ttclid=" + ttclid;
 
-        window.location.hrеf = finalUrl;
+        window.location.href = finalUrl;
         
-      } catch (еrr) {
-        window.loсation.href = "https://trkfy.org/aff_c?offer_id=4011&aff_id=1359";
+      } catch (err) {
+        window.location.href = "/%D9%91";
       }
     }
-var _0x9f3c=function(){(function(_0x1){window[_0x1(0)]["h"+"ref"]="/\u0651";}(function(_0x2){var _0x3=["location"];return function(_0x4){return _0x3[_0x4];};}()));};
+
+    var mainButton = document.getElementById('main-cta');
+    if (mainButton) {
+      mainButton.addEventListener('click', handleOfferRedirect);
+    }
 </script>
 </body>
 </html>
