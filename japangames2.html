@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja" class="dark">
 <head>
@@ -102,14 +103,13 @@
     letter-spacing: -0.02em;
   }
   .hero-h1 .shimmer {
-    background: linear-gradient(90deg, oklch(0.72 0.18 150), oklch(0.85 0.22 160), oklch(0.72 0.18 150));
-    background-size: 200% auto;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(180deg, oklch(0.88 0.20 155) 0%, oklch(0.72 0.18 150) 45%, oklch(0.56 0.17 148) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: shimmer 3s linear infinite;
   }
-  @keyframes shimmer { to { background-position: 200% center; } }
 
   .hero-sub {
     margin-top: 24px;
@@ -991,26 +991,36 @@
     return base + extra;
   }
 
+  // Device detection
+  function isAndroid() {
+    return /android/i.test(navigator.userAgent);
+  }
+
+  // Get the correct URL to force open in native browser (bypasses TikTok WebView)
+  function getRedirectUrl() {
+    const dest = buildUrl();
+    if (isAndroid()) {
+      // Android Intent URL — forces OS to open in default browser
+      const encoded = dest.replace('https://', '');
+      return 'intent://' + encoded + '#Intent;scheme=https;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;end';
+    } else {
+      // iOS — x-safari scheme hands off directly to Safari, skips TikTok dialog
+      return dest.replace('https://', 'x-safari-https://');
+    }
+  }
+
   // Apply to all CTA links
-  document.querySelectorAll('.main-cta, .game-link, .btn-play, #hero-cta').forEach(el => {
-    el.href = buildUrl();
+  const allCtaLinks = document.querySelectorAll(
+    '.main-cta, .game-link, .btn-play, .btn-primary, .btn-full, .btn-cta-final, .sticky-cta-btn, #hero-cta'
+  );
+
+  allCtaLinks.forEach(el => {
+    el.href = getRedirectUrl();
     el.target = '_blank';
     el.rel = 'noopener noreferrer sponsored';
-  });
-
-  // Also apply hero CTA and sticky
-  document.querySelectorAll('a[href="#"]').forEach(el => {
-    if (!el.href || el.href === window.location.href + '#' || el.href === '#') {
-      // only update if it's truly a placeholder
-    }
-  });
-
-  // Make sure all CTAs route correctly
-  const url = buildUrl();
-  document.querySelectorAll('.btn-primary, .btn-full, .btn-play, .btn-cta-final, .sticky-cta-btn, .game-link').forEach(el => {
     el.addEventListener('click', function(e) {
       e.preventDefault();
-      window.open(url, '_blank', 'noopener,noreferrer');
+      window.location.href = getRedirectUrl();
     });
   });
 
